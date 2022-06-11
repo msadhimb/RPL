@@ -60,7 +60,7 @@
 
                   <!-- Submit button -->
                   <div class="d-grid gap-2 col-2 mx-auto">
-                    <input class="btn btn-primary" value="Loginn" type="submit">
+                    <input class="btn btn-primary" value="Loginnn" type="submit">
                   </div>
 
                   <!-- Register buttons -->
