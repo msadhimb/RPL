@@ -33,13 +33,9 @@
               <h2 align="center">Login</h2>
               <?php
               if (isset($_GET['msg'])) {
-                if ($_GET['msg'] == 'not-match') {
+                if ($_GET['msg'] == 'success') {
               ?>
-                  <div class="alert alert-danger">Password dan Confirm password tidak cocok</div>
-                <?php
-                } elseif ($_GET['msg'] == 'success') {
-                ?>
-                  <div class="alert alert-success">User berhasil dibuat</div>
+                  <div class="alert alert-success text-center">User berhasil dibuat</div>
               <?php
                 }
               }
@@ -60,7 +56,7 @@
 
                   <!-- Submit button -->
                   <div class="d-grid gap-2 col-2 mx-auto">
-                    <input class="btn btn-primary" value="Login" type="submit">
+                    <input class="btn btn-primary" value="Sign Up" type="submit">
                   </div>
 
                   <!-- Register buttons -->
