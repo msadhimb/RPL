@@ -1,4 +1,9 @@
 # RPL
+Panduan Login:
+- Jika anda ingin login sebagai client maka anda harus login dengan menggunakan akun gmail (.....@gmail.com)
+- Jika anda ingin login sebagai admin maka anda harus menggunakan akun admin (.....@admin.com)
+- Jika anda login sebagai client maka anda akan diarahkan menuju halaman untuk client
+- Jika anda login sebagai admin maka anda diarahkan menuju halaman admin
 
 Client :
 - Setelah anda order product 1 kali maka anda harus menunggu produk itu selesai diproses bisa dengan cara anda mengambil product diToko tersebut
