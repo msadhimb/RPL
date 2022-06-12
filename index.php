@@ -30,12 +30,12 @@
           <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-              <h2 align="center">Login</h2>
+              <h2 class="mb-4" align="center">Login</h2>
               <?php
               if (isset($_GET['msg'])) {
                 if ($_GET['msg'] == 'success') {
               ?>
-                  <div class="alert alert-success text-center">User berhasil dibuat</div>
+                  <div class="alert alert-success">User berhasil dibuat</div>
               <?php
                 }
               }

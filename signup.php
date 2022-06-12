@@ -30,7 +30,7 @@
           <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-              <h2 align="center">Sign Up</h2>
+              <h2 class="mb-4" align="center">Sign Up</h2>
               <?php
               if (isset($_GET['msg'])) {
                 if ($_GET['msg'] == 'not-match') {
@@ -71,6 +71,10 @@
                     <input class="btn btn-primary" value="Sign Up" type="submit">
                   </div>
                 </form>
+                <div class="row d-flex justify-content-end">
+
+                  <a class="text-end" href="index.php">Sign In</a>
+                </div>
               </div>
             </div>
             <div class="col-2"></div>

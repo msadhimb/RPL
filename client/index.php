@@ -4,7 +4,7 @@ include "../Database.php";
 $d = new Database();
 $data = $d->getDataAll();
 $dataCam = $d->getDataAllCam();
-$dataUser = $d->getDataUser();
+$dataUser = $d->cekAkun();
 
 $data->setFetchMode(PDO::FETCH_ASSOC);
 $dataCam->setFetchMode(PDO::FETCH_ASSOC);
