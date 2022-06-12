@@ -9,6 +9,9 @@ $data->setFetchMode(PDO::FETCH_ASSOC);
 $dataCam->setFetchMode(PDO::FETCH_ASSOC);
 
 session_start();
+if ($_SESSION['isLogin'] != true || $_SESSION['jam_selesai'] == date("Y-m-d H:i:s")) {
+    header("Location: ../index.php?message=nologin");
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,10 +1,10 @@
 <?php
 include "database.php";
 
-$username = $_POST['username'];
+$email = $_POST['email'];
 $password = $_POST['password'];
 
-$data = [$username, $password];
+$data = [$email, $password];
 
 $d = new Database();
 $d->cekLogin($data);

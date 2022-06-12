@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2022 at 10:00 AM
+-- Generation Time: Jun 12, 2022 at 10:20 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `fotoin`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(1000) NOT NULL,
+  `email` varchar(1000) NOT NULL,
+  `Password` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `nama`, `email`, `Password`) VALUES
+(1, 'adadad', 'adhimbaqy72@admin.com', '$2y$10$FYTetMZZBz9QMX/yhXSl5uOicRIDWFjmJcqvB3ryZgOa6R7QEyG5.'),
+(2, 'adhim', 'irene@admin.com', '$2y$10$5Mv9Dkh01udcK.HZcXzcFOdr5.g2Rm2IYAHW2EdoPkgyGg9T5iONy'),
+(3, 'irene', 'irene@admin.com', '$2y$10$XM4xIa6RbTYxMWc1tx2lJ.kUrKtcd6aCRuoOE9to1Todo2s79FjZ.');
 
 -- --------------------------------------------------------
 
@@ -76,8 +98,10 @@ INSERT INTO `data` (`id`, `gambar`, `nama`, `deskripsi`, `harga`) VALUES
 CREATE TABLE `ordered` (
   `kode_pesanan` varchar(100) NOT NULL,
   `pesanan` text NOT NULL,
+  `nama` varchar(1000) NOT NULL,
   `gambar` varchar(1000) NOT NULL,
   `deskripsi` varchar(1000) NOT NULL,
+  `harga` varchar(1000) NOT NULL,
   `totalHarga` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -90,13 +114,27 @@ CREATE TABLE `ordered` (
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `nama` varchar(1000) NOT NULL,
+  `email` varchar(1000) NOT NULL,
   `password` varchar(1000) NOT NULL,
-  `kode_pesanan` varchar(100) NOT NULL
+  `kode_pesanan` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `nama`, `email`, `password`, `kode_pesanan`) VALUES
+(17, 'adhimbuck', 'kidalunch63@gmail.com', '$2y$10$Xy.ztjp2nF7lomrYCSiVteQ5cx2JuTsOdzb3WpbJEtFN1exrcNaM.', '');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `camera`
@@ -120,11 +158,18 @@ ALTER TABLE `ordered`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kode_pesanan` (`kode_pesanan`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `camera`
@@ -142,7 +187,7 @@ ALTER TABLE `data`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

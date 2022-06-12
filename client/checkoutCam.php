@@ -9,6 +9,9 @@ $data->setFetchMode(PDO::FETCH_ASSOC);
 $dataCam->setFetchMode(PDO::FETCH_ASSOC);
 
 session_start();
+if ($_SESSION['isLogin'] != true || $_SESSION['jam_selesai'] == date("Y-m-d H:i:s")) {
+    header("Location: ../index.php?message=nologin");
+}
 ?>
 
 <!DOCTYPE html>
@@ -121,68 +124,115 @@ session_start();
                 <!-- Awal Product -->
                 <section id="product">
                     <h1>Check Out</h1>
-                    <div class="row mb-3">
-                        <?php
-                        $cekuser = $d->getDataDetail();
+                    <?php if (!isset($_GET['id'])) { ?>
+                        <div class="row">
+                            <?php
+                            $cekuser2 = $d->getDataDetailCam();
 
-                        if ($cekuser->rowCount() > 0) {
-                            $cekuser->setFetchMode(PDO::FETCH_ASSOC);
-                            $user = $cekuser->fetch();
-                        ?>
-                            <div class="col-md-5">
-                                <img src="gambarProduct/<?php echo $user['gambar'] ?>" alt="" width="364px" height="264">
-                            </div>
-                            <div class="col-md-5">
-                                <h2 class="mb-3"><?php echo $user['nama'] ?></h2>
-                                <p style="font-size: 20px;"><?php echo $user['deskripsi'] ?></p>
-                                <h1 style="font-size: 20px;">Rp. <?php echo $user['harga'] ?></h1>
-                            </div>
-                        <?php } ?>
-                    </div>
-                    <div class="row">
-                        <?php
-                        $cekuser2 = $d->getDataDetailCam();
-
-                        if ($cekuser2->rowCount() > 0) {
-                            $cekuser2->setFetchMode(PDO::FETCH_ASSOC);
-                            $user2 = $cekuser2->fetch();
-                        ?>
-                            <div class="col-md-5">
-                                <img src="camera/<?php echo $user2['gambar'] ?>" alt="" width="364px" height="264">
-                            </div>
-                            <div class="col-md-5">
-                                <h2 class="mb-3"><?php echo $user2['nama'] ?></h2>
-                                <p style="font-size: 20px;"><?php echo $user2['deskripsi'] ?></p>
-                                <h1 style="font-size: 20px;">Rp. <?php echo $user2['harga'] ?></h1>
-                            </div>
-                        <?php } ?>
-                    </div>
-
-                    <div class="row d-flex justify-content-end">
-                        <div class="col-md-3">
-                            <h2>Rp. <?php
-                                    $list = $d->getDataDetailCam();
-                                    $list2 = $d->getDataDetail();
-                                    if ($list->rowCount() > 0 && $list2->rowCount() > 0) {
-                                        $list2->setFetchMode(PDO::FETCH_ASSOC);
-                                        $listProduct = $list2->fetch();
-
-                                        $list->setFetchMode(PDO::FETCH_ASSOC);
-                                        $listCam = $list->fetch();
-
-                                        $hargaTotal = $listProduct['harga'] + $listCam['harga'];
-                                        echo $hargaTotal;
-                                    }
-                                    ?></h2>
+                            if ($cekuser2->rowCount() > 0) {
+                                $cekuser2->setFetchMode(PDO::FETCH_ASSOC);
+                                $user2 = $cekuser2->fetch();
+                            ?>
+                                <div class="col-md-5">
+                                    <img src="camera/<?php echo $user2['gambar'] ?>" alt="" width="364px" height="264">
+                                </div>
+                                <div class="col-md-5">
+                                    <h2 class="mb-3"><?php echo $user2['nama'] ?></h2>
+                                    <p style="font-size: 20px;"><?php echo $user2['deskripsi'] ?></p>
+                                    <h1 style="font-size: 20px;">Rp. <?php echo $user2['harga'] ?></h1>
+                                </div>
+                            <?php } ?>
                         </div>
-                    </div>
-                    <div class="row  d-flex justify-content-end">
-                        <div class="col-md-3">
-                            <?php $list = $d->getDataDetailCam();
-                            $listId = $list->fetch() ?>
-                            <a class="btn btn-primary" style="width: 180px;" href="order.php?idUser=<?php echo $_GET['idUser'] . "&id=" . $_GET['id'] . "&idCam=" . base64_encode(sha1(rand()) . "|" . $listId['id']) ?>">Order</a>
+                        <div class="row d-flex justify-content-end">
+                            <div class="col-md-3">
+                                <h2>Rp. <?php
+                                        $list = $d->getDataDetailCam();
+
+                                        if ($list->rowCount() > 0) {
+                                            $list->setFetchMode(PDO::FETCH_ASSOC);
+                                            $listCam = $list->fetch();
+
+                                            $hargaTotal = $listCam['harga'];
+                                            echo $hargaTotal;
+                                        }
+                                        ?></h2>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row  d-flex justify-content-end">
+                            <div class="col-md-3">
+                                <?php $list = $d->getDataDetailCam();
+                                $listId = $list->fetch() ?>
+                                <a class="btn btn-primary" style="width: 180px;" href="order.php?idUser=<?php echo $_GET['idUser'] . "&idCam=" . base64_encode(sha1(rand()) . "|" . $listId['id']) ?>">Order</a>
+                            </div>
+                        </div>
+                    <?php  } else { ?>
+
+                        <div class="row mb-3">
+                            <?php
+                            $cekuser = $d->getDataDetail();
+
+                            if ($cekuser->rowCount() > 0) {
+                                $cekuser->setFetchMode(PDO::FETCH_ASSOC);
+                                $user = $cekuser->fetch();
+                            ?>
+                                <div class="col-md-5">
+                                    <img src="gambarProduct/<?php echo $user['gambar'] ?>" alt="" width="364px" height="264">
+                                </div>
+                                <div class="col-md-5">
+                                    <h2 class="mb-3"><?php echo $user['nama'] ?></h2>
+                                    <p style="font-size: 20px;"><?php echo $user['deskripsi'] ?></p>
+                                    <h1 style="font-size: 20px;">Rp. <?php echo $user['harga'] ?></h1>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <div class="row">
+                            <?php
+                            $cekuser2 = $d->getDataDetailCam();
+
+                            if ($cekuser2->rowCount() > 0) {
+                                $cekuser2->setFetchMode(PDO::FETCH_ASSOC);
+                                $user2 = $cekuser2->fetch();
+                            ?>
+                                <div class="col-md-5">
+                                    <img src="camera/<?php echo $user2['gambar'] ?>" alt="" width="364px" height="264">
+                                </div>
+                                <div class="col-md-5">
+                                    <h2 class="mb-3"><?php echo $user2['nama'] ?></h2>
+                                    <p style="font-size: 20px;"><?php echo $user2['deskripsi'] ?></p>
+                                    <h1 style="font-size: 20px;">Rp. <?php echo $user2['harga'] ?></h1>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                        <div class="row d-flex justify-content-end">
+                            <div class="col-md-3">
+                                <h2>Rp. <?php
+                                        $list = $d->getDataDetailCam();
+                                        $list2 = $d->getDataDetail();
+                                        if ($list->rowCount() > 0 && $list2->rowCount() > 0) {
+                                            $list2->setFetchMode(PDO::FETCH_ASSOC);
+                                            $listProduct = $list2->fetch();
+
+                                            $list->setFetchMode(PDO::FETCH_ASSOC);
+                                            $listCam = $list->fetch();
+
+                                            $hargaTotal = $listProduct['harga'] + $listCam['harga'];
+                                            echo $hargaTotal;
+                                        }
+                                        ?></h2>
+                            </div>
+                        </div>
+                        <div class="row  d-flex justify-content-end">
+                            <div class="col-md-3">
+                                <?php $list = $d->getDataDetailCam();
+                                $listId = $list->fetch() ?>
+                                <a class="btn btn-primary" style="width: 180px;" href="order.php?idUser=<?php echo $_GET['idUser'] . "&id=" . $_GET['id'] . "&idCam=" . base64_encode(sha1(rand()) . "|" . $listId['id']) ?>">Order</a>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+
+
                     <!-- Garis -->
                     <div class="container mt-5 mb-1">
                         <hr style="width: 100%; text-align: left; margin-left: 0" />

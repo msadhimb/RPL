@@ -47,9 +47,9 @@
               <div class="border border-2 rounded-4 p-3">
                 <form method="POST" action="login_action.php">
                   <!-- Email input -->
-                  <label class="form-label" for="form2Example1">Username</label>
+                  <label class="form-label" for="form2Example1">Email</label>
                   <div class="form-outline mb-4">
-                    <input id="form2Example1" class="form-control" name="username" />
+                    <input type="email" id="form2Example1" class="form-control" name="email" />
                   </div>
 
                   <!-- Password input -->
