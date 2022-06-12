@@ -21,7 +21,6 @@
           <nav class="navbar navbar-expand-lg">
             <div class="container">
               <a class="navbar-brand fw-bold">Fotoin.com</a>
-
             </div>
           </nav>
         </section>
@@ -32,6 +31,15 @@
             <div class="col-2"></div>
             <div class="col-8">
               <h2 align="center">Sign Up</h2>
+              <?php
+              if (isset($_GET['msg'])) {
+                if ($_GET['msg'] == 'not-match') {
+              ?>
+                  <div class="alert alert-danger text-center">Password dan Confirm password tidak cocok</div>
+                <?php } else if ($_GET['msg'] == 'admin') { ?>
+                  <div class="alert alert-danger text-center">Anda harus menggunakan gmail</div>
+              <?php }
+              } ?>
               <div class="border border-2 rounded-4 p-3">
                 <form method="post" action="signup_action.php">
                   <!-- Username input -->
