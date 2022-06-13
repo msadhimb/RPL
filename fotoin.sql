@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2022 at 10:20 AM
+-- Generation Time: Jun 13, 2022 at 11:36 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.1.6
 
@@ -39,9 +39,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `nama`, `email`, `Password`) VALUES
-(1, 'adadad', 'adhimbaqy72@admin.com', '$2y$10$FYTetMZZBz9QMX/yhXSl5uOicRIDWFjmJcqvB3ryZgOa6R7QEyG5.'),
 (2, 'adhim', 'irene@admin.com', '$2y$10$5Mv9Dkh01udcK.HZcXzcFOdr5.g2Rm2IYAHW2EdoPkgyGg9T5iONy'),
-(3, 'irene', 'irene@admin.com', '$2y$10$XM4xIa6RbTYxMWc1tx2lJ.kUrKtcd6aCRuoOE9to1Todo2s79FjZ.');
+(4, 'wendy', 'wendy@admin', '$2y$10$FKEjtFIW.ta1gybcVd/gMOtPqg2CrPeJPZ6q.xjyDIkixyy46D4vK');
 
 -- --------------------------------------------------------
 
@@ -92,6 +91,26 @@ INSERT INTO `data` (`id`, `gambar`, `nama`, `deskripsi`, `harga`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `manajer`
+--
+
+CREATE TABLE `manajer` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(1000) NOT NULL,
+  `email` varchar(1000) NOT NULL,
+  `password` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `manajer`
+--
+
+INSERT INTO `manajer` (`id`, `nama`, `email`, `password`) VALUES
+(1, 'adhim', 'irene@manager.com', '123');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ordered`
 --
 
@@ -105,6 +124,13 @@ CREATE TABLE `ordered` (
   `totalHarga` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `ordered`
+--
+
+INSERT INTO `ordered` (`kode_pesanan`, `pesanan`, `nama`, `gambar`, `deskripsi`, `harga`, `totalHarga`) VALUES
+('2698729688', '1', 'Drone v3 Pro', 'dronev3.png', 'Frekuensi : 2.4ghz <br/>\r\nWaktu terbang : 30menit <br/>\r\njangkauan : 100m <br/>\r\nFPV Wifi Camera', '2000000', '2000000');
+
 -- --------------------------------------------------------
 
 --
@@ -116,7 +142,7 @@ CREATE TABLE `user` (
   `nama` varchar(1000) NOT NULL,
   `email` varchar(1000) NOT NULL,
   `password` varchar(1000) NOT NULL,
-  `kode_pesanan` varchar(100) DEFAULT NULL
+  `kode_pesanan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -124,7 +150,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `email`, `password`, `kode_pesanan`) VALUES
-(17, 'adhimbuck', 'kidalunch63@gmail.com', '$2y$10$Xy.ztjp2nF7lomrYCSiVteQ5cx2JuTsOdzb3WpbJEtFN1exrcNaM.', '');
+(20, 'a112012641', 'adhimbaqy63@gmail.com', '$2y$10$Rexf2lyvG.yk2d/2PIZr2.v5Ror7GINJ.XkRMnZdlwbtHTxu16rl.', ''),
+(21, 'adhimbuck', 'adhimbaqy72@gmail.com', '$2y$10$08BI2urG791KYzBeZKBi2.xB46Aa649pN0eYQDpReYZmuQj25xuVq', '2698729688');
 
 --
 -- Indexes for dumped tables
@@ -149,6 +176,12 @@ ALTER TABLE `data`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `manajer`
+--
+ALTER TABLE `manajer`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ordered`
 --
 ALTER TABLE `ordered`
@@ -169,7 +202,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `camera`
@@ -184,10 +217,16 @@ ALTER TABLE `data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `manajer`
+--
+ALTER TABLE `manajer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
