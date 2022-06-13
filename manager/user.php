@@ -36,17 +36,20 @@ if ($_SESSION['isLogin'] != true || $_SESSION['jam_selesai'] == date("Y-m-d H:i:
         <section id="homenavbar">
           <nav class="navbar navbar-expand-lg">
             <div class="container">
-              <a class="navbar-brand fw-bold">Fotoin.com (Admin)</a>
+              <a class="navbar-brand fw-bold">Fotoin.com (Manager)</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.php?idAdmin=<?php echo $_GET['idAdmin'] ?>">Dashboard</a>
+                    <a class="nav-link" aria-current="page" href="index.php?idMngr=<?php echo $_GET['idMngr'] ?>">Dashboard</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link active" href="#">Users</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="admin.php?idMngr=<?php echo $_GET['idMngr'] ?>">Admin</a>
                   </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -72,7 +75,6 @@ if ($_SESSION['isLogin'] != true || $_SESSION['jam_selesai'] == date("Y-m-d H:i:
                       <th scope="col">No</th>
                       <th scope="col">Username</th>
                       <th scope="col">Email</th>
-
                     </tr>
                   </thead>
                   <tbody>
@@ -117,8 +119,8 @@ if ($_SESSION['isLogin'] != true || $_SESSION['jam_selesai'] == date("Y-m-d H:i:
                         <tr>
                           <th scope="row"><?php echo $i2 ?></th>
                           <td><?php echo $list2['nama'] ?></td>
-                          <td><a href="user_detail.php?idAdmin=<?php echo $_GET['idAdmin'] . "&kode_pesanan=" . base64_encode(sha1(rand()) . "|" . $list2['kode_pesanan']) ?>"><?php echo $list2['kode_pesanan'] ?></a></td>
-                          <td><a class="btn btn-primary" href="orderDone.php?idAdmin=<?php echo $_GET['idAdmin'] . "&kode_pesanan=" . base64_encode(sha1(rand()) . "|" . $list2['kode_pesanan']) ?>">Selesai</a></td>
+                          <td><a href="user_detail.php?idMngr=<?php echo $_GET['idMngr'] . "&kode_pesanan=" . base64_encode(sha1(rand()) . "|" . $list2['kode_pesanan']) ?>"><?php echo $list2['kode_pesanan'] ?></a></td>
+                          <td><a class="btn btn-primary" href="orderDone.php?idMngr=<?php echo $_GET['idMngr'] . "&kode_pesanan=" . base64_encode(sha1(rand()) . "|" . $list2['kode_pesanan']) ?>">Selesai</a></td>
                         </tr>
                     <?php $i2++;
                       }

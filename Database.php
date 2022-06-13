@@ -110,6 +110,30 @@ class Database
                         } else {
                                 header("Location: login.php?message=failed");
                         }
+                } else if ($namaPisah2[0] === "manager") {
+                        $cekuser = $this->db->prepare("SELECT * FROM manajer WHERE email=?");
+                        $cekuser->execute([$data[0]]);
+
+                        if ($cekuser->rowCount() > 0) {
+                                $cekuser->setFetchMode(PDO::FETCH_ASSOC);
+                                $user = $cekuser->fetch();
+
+                                if ($data[1] === $user['password']) {
+
+                                        session_start(); //untuk memulai session
+                                        //melakukan assignment terhadap variabel session
+
+                                        $_SESSION['jam_mulai'] = date("Y-m-d H:i:s");
+                                        $_SESSION['jam_selesai'] = date("Y-m-d H:i:s", strtotime("+1 hour"));
+                                        $_SESSION['isLogin'] = true;
+
+                                        header("Location: manager/index.php?idMngr=" . base64_encode(sha1(rand()) . "|" . $user['id']));
+                                } else {
+                                        header("Location: login.php?message=failed");
+                                }
+                        } else {
+                                header("Location: login.php?message=failed");
+                        }
                 }
         }
 
@@ -150,6 +174,19 @@ class Database
 
 
                 $del = $this->db->prepare("DELETE FROM ordered WHERE kode_pesanan = ?");
+                $del->execute([$id[1]]);
+        }
+
+        function getDataAdmin()
+        {
+                $rs = $this->db->query("SELECT * FROM admin");
+                return $rs;
+        }
+
+        function deleteAdmin()
+        {
+                $id = explode("|", base64_decode($_GET['idAdmin']));
+                $del = $this->db->prepare("DELETE FROM admin WHERE id=?");
                 $del->execute([$id[1]]);
         }
 }
