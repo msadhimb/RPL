@@ -130,14 +130,38 @@ if ($_SESSION['isLogin'] != true || $_SESSION['jam_selesai'] == date("Y-m-d H:i:
         </div>
 
         <!-- Awal Product -->
+        <section id="product">
         <?php
         $product = $dataUser->fetch();
-        if ($product['kode_pesanan'] !== '') { ?>
+
+        if ($product['kode_pesanan'] !== '' && $product['bukti_transfer'] !== '') { ?>
           <h1 class="text-center">Pesanan Anda Akan Segera Kami Proses <br> Terimakasih telah melakukan transaksi di <strong>Fotoin.com</strong></h1>
+        <?php
+        } else if ($product['kode_pesanan'] !== '' && $product['bukti_transfer'] === '') {
+          $dataOrder = $d->getOrder();
+          $dataOrder->setFetchMode(PDO::FETCH_ASSOC);
+          $order = $dataOrder->fetch();
+
+          $dataAkun = $d->cekAkun();
+          $dataAkun->setFetchMode(PDO::FETCH_ASSOC);
+          $users = $dataAkun->fetch();
+        ?>
+          <h2 class="text-center">Detail</h2>
+          <h2 class="text-center">Username : <?php echo $users['nama'] ?></h2>
+          <h2 class="text-center">Jumlah : <?php echo $order['totalHarga'] ?></h2>
+          <h2 class="text-center mb-3">Rekening Fotoin.com : 88645734535246 a/n Fotoin.com</h2>
+          <h2 class="text-center">Silahkan mengupload bukti transfer dibawah</h2>
+          <form action="buktiTransfer.php?idUser=<?php echo $_GET['idUser'] ?>" method="POST" enctype="multipart/form-data">
+            <div class="row d-flex justify-content-center mt-3">
+              <div class="input-group col-md-2" style="width: 500px;">
+                <input type="file" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" name="bukti">
+                <input class="btn btn-outline-primary" type="submit" id="button-addon1" value="Kirim">
+              </div>
+            </div>
+          </form>
         <?php
         } else {
         ?>
-          <section id="product">
             <h4>Our <strong>Product</strong></h4>
             <div class="row">
               <?php foreach ($data as $ddata => $list) { ?>
@@ -177,9 +201,9 @@ if ($_SESSION['isLogin'] != true || $_SESSION['jam_selesai'] == date("Y-m-d H:i:
                   <!-- Akhir Product 1 -->
                 </div>
               <?php } ?>
-          </section>
-        <?php } ?>
-
+              <?php } ?>
+              
+       </section>
         <div>
           <!-- Garis -->
           <div class="container mt-5 mb-1">
@@ -192,7 +216,7 @@ if ($_SESSION['isLogin'] != true || $_SESSION['jam_selesai'] == date("Y-m-d H:i:
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
               <path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path>
             </svg>
-            by Urra Team
+            by Fotoin.com
           </p>
           <!-- Akhir Footer -->
         </div>

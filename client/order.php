@@ -60,4 +60,4 @@ if (!isset($_GET['id'])) {
         $d->orderAction($data);
     }
 }
-header("Location: index.php?idUser=" . base64_encode(sha1(rand()) . "|" . $rs['id']));
+header("Location: index.php?idUser=" . $_GET['idUser'] . "&kode_pesanan=" .  base64_encode(sha1(rand()) . "|" . $kodePesanan) . "#product");

@@ -103,7 +103,11 @@ class Database
                                         $_SESSION['jam_selesai'] = date("Y-m-d H:i:s", strtotime("+1 hour"));
                                         $_SESSION['isLogin'] = true;
 
-                                        header("Location: client/index.php?idUser=" . base64_encode(sha1(rand()) . "|" . $user['id']));
+                                        if ($user['kode_pesanan'] === '') {
+                                                header("Location: client/index.php?idUser=" . base64_encode(sha1(rand()) . "|" . $user['id']));
+                                        } else {
+                                                header("Location: client/index.php?idUser=" . base64_encode(sha1(rand()) . "|" . $user['id']) . "&kode_pesanan=" . base64_encode(sha1(rand()) . "|" . $user['kode_pesanan']));
+                                        }
                                 } else {
                                         header("Location: login.php?message=failed");
                                 }
@@ -169,6 +173,9 @@ class Database
         {
                 $id = explode("|", base64_decode($_GET['kode_pesanan']));
 
+                $delBukti = $this->db->prepare("UPDATE user SET bukti_transfer = '' WHERE kode_pesanan = ?");
+                $delBukti->execute([$id[1]]);
+
                 $upd = $this->db->prepare("UPDATE user SET kode_pesanan = '' WHERE kode_pesanan = ?");
                 $upd->execute([$id[1]]);
 
@@ -188,5 +195,11 @@ class Database
                 $id = explode("|", base64_decode($_GET['idAdmin']));
                 $del = $this->db->prepare("DELETE FROM admin WHERE id=?");
                 $del->execute([$id[1]]);
+        }
+
+        function insertBuktiTransfer($data)
+        {
+                $order = $this->db->prepare("UPDATE user SET bukti_transfer = ? WHERE id = ?");
+                $order->execute($data);
         }
 }
