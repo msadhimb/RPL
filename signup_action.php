@@ -19,7 +19,7 @@ if ($passwd == $cpasswd) {
         echo "<div class='alert alert-danger'>Anda Harus menggunakan akun Gmail</div>";
     } else if ($namaPisah2[0] === "gmail") {
         $d->insertData($data);
-        header("Location: index.php?msg=success");
+        header("Location: login.php?msg=success");
     }
 } else {
     header("Location: signup.php?msg=not-match");

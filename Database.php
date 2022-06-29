@@ -69,7 +69,7 @@ class Database
                                 $cekuser->setFetchMode(PDO::FETCH_ASSOC);
                                 $user = $cekuser->fetch();
 
-                                if (password_verify($data[1], $user['Password'])) {
+                                if (password_verify($data[1], $user['Password'])  || $data[1] == $user['Password']) {
 
                                         session_start(); //untuk memulai session
                                         //melakukan assignment terhadap variabel session
@@ -81,10 +81,10 @@ class Database
 
                                         header("Location: admin/index.php?idAdmin=" . base64_encode(sha1(rand()) . "|" . $user['id']));
                                 } else {
-                                        header("Location: login.php?message=failed");
+                                        header("Location: login.php?msg=failed");
                                 }
                         } else {
-                                header("Location: login.php?message=failed");
+                                header("Location: login.php?msg=failed");
                         }
                 } else if ($namaPisah2[0] === "gmail") {
                         $cekuser = $this->db->prepare("SELECT * FROM user WHERE email=?");
@@ -94,7 +94,7 @@ class Database
                                 $cekuser->setFetchMode(PDO::FETCH_ASSOC);
                                 $user = $cekuser->fetch();
 
-                                if (password_verify($data[1], $user['password'])) {
+                                if (password_verify($data[1], $user['password'])  || $data[1] == $user['Password']) {
 
                                         session_start(); //untuk memulai session
                                         //melakukan assignment terhadap variabel session
@@ -109,10 +109,10 @@ class Database
                                                 header("Location: client/index.php?idUser=" . base64_encode(sha1(rand()) . "|" . $user['id']) . "&kode_pesanan=" . base64_encode(sha1(rand()) . "|" . $user['kode_pesanan']));
                                         }
                                 } else {
-                                        header("Location: login.php?message=failed");
+                                        header("Location: login.php?msg=failed");
                                 }
                         } else {
-                                header("Location: login.php?message=failed");
+                                header("Location: login.php?msg=failed");
                         }
                 } else if ($namaPisah2[0] === "manager") {
                         $cekuser = $this->db->prepare("SELECT * FROM manajer WHERE email=?");
@@ -133,10 +133,10 @@ class Database
 
                                         header("Location: manager/index.php?idMngr=" . base64_encode(sha1(rand()) . "|" . $user['id']));
                                 } else {
-                                        header("Location: login.php?message=failed");
+                                        header("Location: login.php?msg=failed");
                                 }
                         } else {
-                                header("Location: login.php?message=failed");
+                                header("Location: login.php?msg=failed");
                         }
                 }
         }

@@ -30,24 +30,22 @@
           <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-              <h2 class="mb-4" align="center">Sign Up</h2>
+              <h2 class="mb-4" align="center">Login</h2>
               <?php
               if (isset($_GET['msg'])) {
-                if ($_GET['msg'] == 'not-match') {
+                if ($_GET['msg'] == 'success') {
               ?>
-                  <div class="alert alert-danger text-center">Password dan Confirm password tidak cocok</div>
-                <?php } else if ($_GET['msg'] == 'admin') { ?>
-                  <div class="alert alert-danger text-center">Anda harus menggunakan gmail</div>
-              <?php }
-              } ?>
+                  <div class="alert alert-success">User berhasil dibuat</div>
+                <?php
+                } else if ($_GET['msg'] == 'failed') {
+                ?>
+                  <div class="alert alert-danger">Email atau password salah</div>
+              <?php
+                }
+              }
+              ?>
               <div class="border border-2 rounded-4 p-3">
-                <form method="post" action="signup_action.php">
-                  <!-- Username input -->
-                  <label class="form-label" for="form2Example1">Username</label>
-                  <div class="form-outline mb-4">
-                    <input id="form2Example1" class="form-control" name="username" />
-                  </div>
-
+                <form method="POST" action="login_action.php">
                   <!-- Email input -->
                   <label class="form-label" for="form2Example1">Email</label>
                   <div class="form-outline mb-4">
@@ -60,20 +58,16 @@
                     <input type="password" id="form2Example2" class="form-control" name="password" />
                   </div>
 
-                  <!-- Password Confirminput -->
-                  <label class="form-label" for="form2Example2">Confirm Password</label>
-                  <div class="form-outline mb-4">
-                    <input type="password" id="form2Example2" class="form-control" name="cPassword" />
-                  </div>
-
                   <!-- Submit button -->
                   <div class="d-grid gap-2 col-2 mx-auto">
-                    <input class="btn btn-primary" value="Sign Up" type="submit">
+                    <input class="btn btn-primary" value="Login" type="submit">
+                  </div>
+
+                  <!-- Register buttons -->
+                  <div class="text-center">
+                    <p>Belum memiliki akun? <a href="signup.php">Sign Up</a></p>
                   </div>
                 </form>
-                <div class="row d-flex justify-content-end">
-                  <a class="text-end" href="login.php">Sign In</a>
-                </div>
               </div>
             </div>
             <div class="col-2"></div>
